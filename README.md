@@ -45,16 +45,19 @@ As long as you are in the my_deployment directory you can use kubectl over SSH t
 
 spawnd ssh
 
-# Deploy your first application
+# Deploy The Blockchain
 
-In this guide we are going to deploy a simple application: cheese. We will deploy 3 web pages with a 2 replication factor. The master node will act as a reverse proxy, load balancing the requests among the replicas in the Kubernetes nodes.
-
-The simple cluster that we just deployed uses nip.io as base domain for incoming HTTP traffic. First, we need to figure out our cluster domain by running:
 
 grep domain inventory
 The command will return something like domain=37.153.138.137.nip.io, meaning that our cluster domain name in this case would be 37.153.138.137.nip.io.
 
 In Spawnd we encourage to deploy and define SaaS-layer applications using Helm.
+
+Ethereum:
+
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+
+helm install stable/ethereum --version 0.1.1
 
 spawnd helm install --name --set domain=<your-domain> 
 If everything goes well you should be able to access the web pages.
