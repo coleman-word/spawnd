@@ -42,12 +42,12 @@ for group_id in $LOCAL_GROUP_IDS; do
 
 done
 
-# add KubeNow bin path (works with gosu - environment variables are kept
+# add Spawnd bin path (works with gosu - environment variables are kept
 # when swiching user)
-if [[ "$1" == "kn-init" ]]; then
-  export PATH="/opt/KubeNow/bin:$PATH"
+if [[ "$1" == "spawnd-init" ]]; then
+  export PATH="/opt/Spawnd/bin:$PATH"
 else
-  export PATH="/KubeNow_root/bin:$PATH"
+  export PATH="/Spawnd_root/bin:$PATH"
 fi
 
 # re-cite arguments (because user commands are passed via the ssh-wrapper)
@@ -55,13 +55,13 @@ for arg in "$@"; do
   recited_cmd="$recited_cmd \"$arg\""
 done
 
-# enter KubeNow user config path
-if [ ! -d "/KubeNow_root" ]; then
-  echo "Error: /KubeNow_root does not exist, exiting." >&2
+# enter Spawnd user config path
+if [ ! -d "/Spawnd_root" ]; then
+  echo "Error: /Spawnd_root does not exist, exiting." >&2
   exit 1
 fi
-cd "/KubeNow_root"
+cd "/Spawnd_root"
 
 # run command as above created user via ssh-wrapper script that adds the
 # ssh-agent to this execution environment
-gosu "$username" sh -c "/opt/KubeNow/bin/ssh-agent-wrapper $recited_cmd"
+gosu "$username" sh -c "/opt/Spawnd/bin/ssh-agent-wrapper $recited_cmd"
