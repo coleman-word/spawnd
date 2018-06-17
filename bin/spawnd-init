@@ -1,22 +1,5 @@
 #!/bin/bash
 
-# Exit if a command exits with a non-zero status
-set -e
-
-host_cloud="$1"
-
-echo "Initializing $INIT_DIR deployment directory for cloud provider $host_cloud"
-
-# Copy config, scripts and template files to init dir
-cp "/opt/Spawnd/templates/terraform.tfvars.$host_cloud-template" "/Spawnd_root/terraform.tfvars"
-cp -r "/opt/Spawnd/$host_cloud" "/Spawnd_root/"
-cp -r "/opt/Spawnd/common" "/Spawnd_root/"
-cp -r "/opt/Spawnd/bootstrap" "/Spawnd_root/"
-cp -r "/opt/Spawnd/bootstrap" "/Spawnd_root/"
-cp -r "/opt/Spawnd/bin" "/Spawnd_root/"
-cp -r "/opt/Spawnd/playbooks" "/Spawnd_root/"
-cp "/opt/Spawnd/ansible.cfg" "/Spawnd_root/"
-
 # Generate and write kubetoken
 tokenID=$(openssl rand -hex 3)
 tokenVal=$(openssl rand -hex 8)
